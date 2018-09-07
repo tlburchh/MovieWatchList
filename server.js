@@ -47,7 +47,7 @@ app.get("/", function(req, res) {
 
 //create a new movie
 
-app.post("/movies", function(req, res) {
+app.post("/towatch", function(req, res) {
   connection.query("INSERT INTO movies (movie) VALUES (?)", [req.body.movie], function(err, result){
     if (err) {
       return res.status(500).end();
@@ -60,7 +60,7 @@ app.post("/movies", function(req, res) {
 });
 
 //retrieve all movies
-app.get("/movies", function(req, res){
+app.get("/towatch", function(req, res){
   connection.query("SELECT * FROM movies;", function(err, data){
     if (err) {
       return res.status(500).end();
@@ -70,9 +70,9 @@ app.get("/movies", function(req, res){
 });
 
 //update movie
-app.put("/movies/:id", function(req, res){
+app.put("/towatch/:id", function(req, res){
   connection.query("UPDATE movies SET movie = ? WHERE id = ?",
-[req.body.plan, req.params.id], function(err, result){
+[req.body.movie, req.params.id], function(err, result){
   if (err) {
     return res.status(500).end();
   }
@@ -84,7 +84,7 @@ app.put("/movies/:id", function(req, res){
 });
 
 //delete a movie
-app.delete("/movies/:id", function(req, res) {
+app.delete("/towatch/:id", function(req, res) {
   connection.query("DELETE FROM movies WHERE id = ?", [req.params.id], function(err, result){
     if(err) {
       return res.status(500).end();
